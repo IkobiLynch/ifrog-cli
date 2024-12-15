@@ -1,0 +1,9 @@
+# Example template 
+# Copy and rename the file to config.json locally. 
+# Enter the access token provided and then run a cli command 
+# It will ask you to login and automatically populate the username variable on succesful login.
+{
+    "repository_url": "https://ilynchcompuzign.jfrog.io/artifactory",
+    "access_token": "replace with token",
+    "username": ""
+}

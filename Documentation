@@ -1,0 +1,13 @@
+Package type
+Possible Package types: "alpine"|"cargo"|"composer"|"bower"|"chef"|"cocoapods"|"conan"|"conda"|"cran"|"debian"|"docker"|"helm"|"helmoci"|"huggingfaceml"|"gems"|"gitlfs"|"go"|"gradle"|"ivy"|"maven"|"npm"|"nuget"|"oci"|"opkg"|"pub"|"puppet"|"pypi"|"rpm"|"sbt"|"swift"|"terraform"|"terraformbackend"|"vagrant"|"yum"|"generic" (default)
+
+install jq
+
+Move bin files to /usr/local/bin
+Copy config.json to HOME/.ifrog/config.json
+
+Custom Man Directory
+mkdir -p ~/.man/man/man1
+cp ifrog.1 ~/.man/man/man1/
+export MANPATH=$HOME/.man/man:$MANPATH
+source ~/.zshrc  # Or source ~/.bash_profile

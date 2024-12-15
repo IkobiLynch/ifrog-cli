@@ -1,0 +1,77 @@
+.\" Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\" See Also:
+.\" man mdoc.samples for a complete listing of options
+.\" man mdoc for the short list of editing options
+.\" /usr/share/misc/mdoc.template
+.Dd December 14, 2024      \" DATE
+.Dt IFROG 1                \" Program name and manual section number
+.Os Darwin
+.Sh NAME                  \" Section Header - required - don't modify
+.Nm ifrog
+.Nd A CLI tool for managing JFrog Artifactory via REST APIs.
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+.Nm ifrog
+.Op Fl -ping
+.Op Fl -version
+.Op Fl -login
+.Op Fl -create-user Ar <username> Ar <email> Ar <password>
+.Op Fl -delete-user Ar <username>
+.Op Fl -storage-info
+.Op Fl -create-repo Ar <repo-key> Ar <package-type>
+.Op Fl -list-repos
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+The \fBifrog\fR command-line tool interacts with a JFrog Artifactory instance, allowing users to perform repository management and system administration tasks.
+
+It relies on a configuration file stored in \fB~/.jfrog/config.json\fR to store essential connection details such as the repository URL, access token, and username. If the username is not configured, users must log in before performing any actions.
+
+.Sh COMMANDS
+.Bl -tag -width 12n       \" Begin a tagged list
+.It Fl -ping
+Tests connectivity to the Artifactory instance by sending a health check request.
+
+.It Fl -version
+Displays the version of the connected Artifactory instance.
+
+.It Fl -login
+Logs in to the Artifactory instance using a username and password. The username is stored in the configuration file for subsequent use.
+
+.It Fl -create-user Ar <username> Ar <email> Ar <password>
+Creates a new user in the Artifactory instance with the specified username, email, and password.
+
+.It Fl -delete-user Ar <username>
+Deletes the specified user from the Artifactory instance.
+
+.It Fl -storage-info
+Displays storage information, including repository usage statistics.
+
+.It Fl -create-repo Ar <repo-key> Ar <package-type>
+Creates a new repository with the specified repository key (\fIrepo-key\fR) and package type (\fIpackage-type\fR). The \fIrepo-key\fR must be unique across the instance.
+
+.It Fl -list-repos
+Lists all repositories available in the Artifactory instance.
+.El                      \" End the list
+
+.Sh EXAMPLES
+.Bl -tag -width 12n
+.It  ifrog --ping
+.Ed
+
+.It ifrog --create-user "testuser" "testuser@example.com" "password123" 
+.Ed
+
+.It ifrog --create-repo "example-repo" "maven"
+.Ed
+
+.Sh FILES
+.Bl -tag -width "/Users/joeuser/.ifrog_config.json"
+.It Pa ~/.ifrog/config.json
+Stores the repository URL, access token, and username for the Artifactory instance.
+
+.El                      \" End the list
+.Sh SEE ALSO
+.Xr curl 1 ,
+.Xr jq 1
+.Sh AUTHORS
+Written by Ikobi Lynch.
+.Sh BUGS
+Report bugs to <ishaashi16@gmail.com>.
