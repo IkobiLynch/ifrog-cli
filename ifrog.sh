@@ -9,8 +9,8 @@
 set -euo pipefail
 
 # Path to config file
-# CONFIG_FILE="$HOME/.ifrog/config.json"
-CONFIG_FILE="./config.json"
+CONFIG_FILE="$HOME/.ifrog/config.json"
+# CONFIG_FILE="./config.json"
 
 # Function to load config
 load_config() {
@@ -94,6 +94,23 @@ get_storage_info() {
     echo "$response"
 }
 
+help_menu(){
+    echo "Usage: ifrog [command] "
+    echo ""
+    echo "Commands:"
+    echo "  --ping                Test connectivity to the Artifactory instance."
+    echo "  --version             Display the version of the Artifactory instance."
+    echo "  --login               Log in with username and password."
+    echo "  --create-user         Create a user: ifrog --create-user <username> <email> <password>"
+    echo "  --delete-user         Delete a user: ifrog --delete-user <username>"
+    echo "  --storage-info        Display storage usage."
+    echo "  --create-repo         Create a repository: ifrog --create-repo <repo-key> <package-type>"
+    echo "  --list-repos          List all repositories."
+    echo ""
+    echo "For more details, see the man page: man ifrog"
+    exit 0
+}
+
 
 create_repository() {
     # Currently only makes local repo.
@@ -160,7 +177,7 @@ while getopts ":hv-:" opt; do
                     exit
                     ;;
                 help)
-                    echo "Usage: ifrog [--ping | --version | --login | --create-user <username> <email> <password> | --delete-user <username> | --storage-info | --create-repo <repo-key> <package-type> | --list-repos]"
+                    help_menu
                     exit
                     ;;
                 *)
@@ -170,8 +187,7 @@ while getopts ":hv-:" opt; do
             esac
             ;;
         h)
-            echo "Usage: ifrog [--ping | --version | --login | --create-user <username> <email> <password> | --delete-user <username> | --storage-info | --create-repo <repo-key> <package-type> | --list-repos]"
-            exit
+            help_menu
             ;;
         v)
             echo "ifrog CLI version 1.0"
@@ -185,6 +201,7 @@ while getopts ":hv-:" opt; do
 done
 
 if [ $OPTIND -eq 1 ]; then
-    echo "Usage: $0 [--ping | --version | --login | --create-user <username> <email> <password> | --delete-user <username> | --storage-info | --create-repo <repo-key> <package-type> | --list-repos]"
+    echo "Usage: "
+    echo "ifrog [--ping | --version | --login | --create-user <username> <email> <password> | --delete-user <username> | --storage-info | --create-repo <repo-key> <package-type> | --list-repos]"
     exit 1
 fi
